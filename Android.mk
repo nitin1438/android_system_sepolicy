@@ -262,7 +262,7 @@ $(PLAT_PUBLIC_POLICY) $(REQD_MASK_POLICY))
 		-D target_arch=$(PRIVATE_TGT_ARCH) \
 		-D target_with_asan=$(PRIVATE_TGT_WITH_ASAN) \
 		-D target_full_treble=$(PRODUCT_FULL_TREBLE) \
-		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS) \
+		-D target_needs_platform_textrels=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 
 plat_pub_policy.cil := $(intermediates)/plat_pub_policy.cil
@@ -319,7 +319,7 @@ $(PLAT_PUBLIC_POLICY) $(PLAT_PRIVATE_POLICY))
 		-D target_arch=$(PRIVATE_TGT_ARCH) \
 		-D target_with_asan=$(PRIVATE_TGT_WITH_ASAN) \
 		-D target_full_treble=$(PRODUCT_FULL_TREBLE) \
-		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS) \
+		-D target_needs_platform_textrels=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 	$(hide) sed '/dontaudit/d' $@ > $@.dontaudit
 
@@ -431,7 +431,7 @@ $(PLAT_PUBLIC_POLICY) $(REQD_MASK_POLICY) $(PLAT_VENDOR_POLICY) $(BOARD_SEPOLICY
 		-D target_arch=$(PRIVATE_TGT_ARCH) \
 		-D target_with_asan=$(PRIVATE_TGT_WITH_ASAN) \
 		-D target_full_treble=$(PRODUCT_FULL_TREBLE) \
-		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS) \
+		-D target_needs_platform_textrels=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 	$(hide) sed '/dontaudit/d' $@ > $@.dontaudit
 
@@ -559,7 +559,7 @@ $(sepolicy.recovery.conf): $(call build_policy, $(sepolicy_build_files), \
 		-D target_arch=$(PRIVATE_TGT_ARCH) \
 		-D target_with_asan=$(PRIVATE_TGT_WITH_ASAN) \
 		-D target_recovery=true \
-		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS) \
+		-D target_needs_platform_textrels=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 	$(hide) sed '/dontaudit/d' $@ > $@.dontaudit
 
@@ -603,7 +603,7 @@ $(PLAT_PUBLIC_POLICY) $(PLAT_PRIVATE_POLICY))
 		-D target_arch=$(PRIVATE_TGT_ARCH) \
 		-D target_with_asan=false \
 		-D target_full_treble=cts \
-		-D target_needs_platform_text_relocations=$(TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS) \
+		-D target_needs_platform_textrels=$(TARGET_NEEDS_PLATFORM_TEXTRELS) \
 		-s $^ > $@
 	$(hide) sed '/dontaudit/d' $@ > $@.dontaudit
 
