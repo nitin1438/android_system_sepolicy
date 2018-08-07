@@ -318,6 +318,13 @@ endif
 # Builds an addtional userdebug sepolicy into the debug ramdisk.
 LOCAL_REQUIRED_MODULES += \
     userdebug_plat_sepolicy.cil \
+ifneq ($(PLATFORM_SEPOLICY_VERSION),$(TOT_SEPOLICY_VERSION))
+ifeq ($(PLATFORM_SEPOLICY_VERSION_TEST),true)
+LOCAL_REQUIRED_MODULES += \
+    sepolicy_freeze_test
+
+endif # ($(PLATFORM_SEPOLICY_VERSION_TEST),true)
+endif # ($(PLATFORM_SEPOLICY_VERSION),$(TOT_SEPOLICY_VERSION))
 
 include $(BUILD_PHONY_PACKAGE)
 
@@ -1365,8 +1372,10 @@ $(LOCAL_BUILT_MODULE): PRIVATE_BASE_PLAT_PUBLIC_PREBUILT := $(base_plat_public_p
 $(LOCAL_BUILT_MODULE): PRIVATE_BASE_PLAT_PRIVATE_PREBUILT := $(base_plat_private_prebuilt)
 $(LOCAL_BUILT_MODULE): $(all_frozen_files)
 ifneq ($(PLATFORM_SEPOLICY_VERSION),$(TOT_SEPOLICY_VERSION))
+ifeq ($(PLATFORM_SEPOLICY_VERSION_TEST),true)
 	@diff -rq -x bug_map $(PRIVATE_BASE_PLAT_PUBLIC_PREBUILT) $(PRIVATE_BASE_PLAT_PUBLIC)
 	@diff -rq -x bug_map $(PRIVATE_BASE_PLAT_PRIVATE_PREBUILT) $(PRIVATE_BASE_PLAT_PRIVATE)
+endif # ($(PLATFORM_SEPOLICY_VERSION_TEST),true)
 endif # ($(PLATFORM_SEPOLICY_VERSION),$(TOT_SEPOLICY_VERSION))
 	$(hide) touch $@
 
